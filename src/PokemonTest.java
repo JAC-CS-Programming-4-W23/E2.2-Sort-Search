@@ -34,33 +34,6 @@ class PokemonTest {
     }
 
     @Test
-    void testPokemonCanBeBinarySearched() {
-        Pokemon[] collection = new Pokemon[5];
-
-        collection[0] = new Pokemon("Bulbasaur", 10, Pokemon.Type.GRASS);
-        collection[1] = new Pokemon("Squirtle", 10, Pokemon.Type.WATER);
-        collection[2] = new Pokemon("Bulbasaur", 11, Pokemon.Type.GRASS);
-        collection[3] = new Pokemon("Charmander", 9, Pokemon.Type.FIRE);
-        collection[4] = new Pokemon("Bulbasaur", 10, Pokemon.Type.GRASS);
-
-        Arrays.sort(collection);
-
-        int position0 = Pokemon.binarySearch(collection, "Bulbasaur", 10);
-        int position1 = Pokemon.binarySearch(collection, "Bulbasaur", 10);
-        int position2 = Pokemon.binarySearch(collection, "Bulbasaur", 11);
-        int position3 = Pokemon.binarySearch(collection, "Charmander", 9);
-        int position4 = Pokemon.binarySearch(collection, "Squirtle", 10);
-        int position5 = Pokemon.binarySearch(collection, "Pikachu", 10);
-
-        assertEquals(0, position0);
-        assertEquals(0, position1);
-        assertEquals(2, position2);
-        assertEquals(3, position3);
-        assertEquals(4, position4);
-        assertEquals(-1, position5);
-    }
-
-    @Test
     void testPokemonCanBeAddedToTeamFromCollection() throws PokemonNotFoundException {
         Pokemon[] collection = new Pokemon[3];
         Pokemon[] team = new Pokemon[6];
@@ -100,5 +73,50 @@ class PokemonTest {
         Exception exception = assertThrows(PokemonNotFoundException.class, () -> Pokemon.addToTeam(collection, team, 0, "Bulbasaur", 11));
 
         assertEquals("Level 11 Bulbasaur not found in collection.", exception.getMessage());
+    }
+
+    @Test
+    void testNumberBinarySearch() {
+        int[] numbers = new int[] { 1, 2, 3, 4, 5 };
+        int position0 = Pokemon.binarySearch(numbers, 1);
+        int position1 = Pokemon.binarySearch(numbers, 2);
+        int position2 = Pokemon.binarySearch(numbers, 3);
+        int position3 = Pokemon.binarySearch(numbers, 4);
+        int position4 = Pokemon.binarySearch(numbers, 5);
+        int position5 = Pokemon.binarySearch(numbers, 6);
+
+        assertEquals(0, position0);
+        assertEquals(1, position1);
+        assertEquals(2, position2);
+        assertEquals(3, position3);
+        assertEquals(4, position4);
+        assertEquals(-1, position5);
+    }
+
+    @Test
+    void testPokemonCanBeBinarySearched() {
+        Pokemon[] collection = new Pokemon[5];
+
+        collection[0] = new Pokemon("Bulbasaur", 10, Pokemon.Type.GRASS);
+        collection[1] = new Pokemon("Squirtle", 10, Pokemon.Type.WATER);
+        collection[2] = new Pokemon("Bulbasaur", 11, Pokemon.Type.GRASS);
+        collection[3] = new Pokemon("Charmander", 9, Pokemon.Type.FIRE);
+        collection[4] = new Pokemon("Bulbasaur", 10, Pokemon.Type.GRASS);
+
+        Arrays.sort(collection);
+
+        int position0 = Pokemon.binarySearch(collection, "Bulbasaur", 10);
+        int position1 = Pokemon.binarySearch(collection, "Bulbasaur", 10);
+        int position2 = Pokemon.binarySearch(collection, "Bulbasaur", 11);
+        int position3 = Pokemon.binarySearch(collection, "Charmander", 9);
+        int position4 = Pokemon.binarySearch(collection, "Squirtle", 10);
+        int position5 = Pokemon.binarySearch(collection, "Pikachu", 10);
+
+        assertEquals(0, position0);
+        assertEquals(0, position1);
+        assertEquals(2, position2);
+        assertEquals(3, position3);
+        assertEquals(4, position4);
+        assertEquals(-1, position5);
     }
 }
